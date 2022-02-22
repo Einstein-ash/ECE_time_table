@@ -103,10 +103,10 @@ margin-right: 10px; */
 
   .noti_strip {
 
-    border: 3px solid rgb(204, 125, 125);
+    border: 0px solid rgb(204, 125, 125);
     border-radius: 10px;
-    background: rgb(255, 57, 57);
-    color: white;
+    background: #fff;
+    color: red;
     font-size: large;
     width : 70% ;
     direction : left;
@@ -115,12 +115,7 @@ margin-right: 10px; */
              
 
   }
- }
-  .noti_strip2 {
 
-text-align: center;
-
-  }
   
 
 

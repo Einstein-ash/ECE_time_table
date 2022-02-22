@@ -1,7 +1,6 @@
 #full {
     margin: 15px 15px 15px 15px;
-    border: 15px solid white;
-  
+    border : 15px solid white;
     box-sizing: 10px solid white;
     /* border: 50px solid white; */
     border-radius: 20px;
@@ -33,7 +32,7 @@
   #head {
     color: rgb(0, 0, 0);
     text-shadow: 3px 2px 2px #fff;
-  
+    margin-top: 20px;
     /* background-color: wheat; */
     background: linear-gradient(#e497c4, #fffe8d);
     text-align: center;
@@ -60,6 +59,7 @@
     border-radius: 10px;
     display: flex;
     /* display:inline; */
+    margin-top: 20px;
   }
   
   .notes {
@@ -104,13 +104,19 @@
     background: linear-gradient(#7ff3e9, #da6dc7);
     border-style: dashed;
     padding : 5px 5px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  .ar {
+
+    margin: 20px 20px;
   }
 
- .noti_strip {
+  .noti_strip {
 
     border: 0px solid rgb(0, 0, 0);
     border-radius: 10px;
-    background: rgb(255, 255, 255);
+    background: #f0f0f0;
     color: rgb(255, 0, 0);
     font-size:large;
     width : 100% ;
@@ -122,11 +128,19 @@
  }
 
 
-  /* .noti_strip2 {
+.nav ul {
+    list-style-type: none;
+}
 
-text-align: center ;
+.nav ul li{
 
-  } */
+    display: inline-block;
+    font-size: 25px;
+    padding : 20px;
+    color: blue;
+}
+
+
 
   
   

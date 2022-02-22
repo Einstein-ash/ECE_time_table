@@ -1,66 +1,284 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <!-- <link rel="stylesheet" href="t_t_c.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Comforter&family=Pacifico&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Rubik+Beastly&display=swap" rel="stylesheet"> -->
+  <meta charset="UTF-8">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700i" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style2.css">
+
+  <title>ECE-A TIME TABLE </title>
+
+  <style>
+    /* * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      color: #000;
+    } */
 
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    html,
+    body {
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Roboto Condensed', sans-serif;
+    }
 
-    <title>ECE-A TIME TABLE </title>
+    .page {
+      height: 100%;
+      background-color: #584e4a;
+    }
+
+    .content {
+      height: 200%;
+      transform-origin: top left;
+      transition: transform 0.7s cubic-bezier(1, 0.005, 0.24, 1);
+      background-color: #f0f0f0;
+    }
+
+    .content_inner {
+      height: 50%;
+      overflow-y: auto;
+      padding: 50px 5%;
+      margin-bottom: 20px;
+    }
+
+    /* basically all styling from now on */
+    .menu_toggle {
+      z-index: 900;
+      position: fixed;
+      top: 0;
+      left: 0;
+      display: block;
+      cursor: pointer;
+      width: 100px;
+      height: 80px;
+      background-color: #f37272;
+      border-bottom-right-radius: 100%;
+    }
+
+    .menu_toggle:active i {
+      opacity: 0.8;
+    }
+
+    .menu_toggle i {
+      color: #f0f0f0;
+    }
+
+    .menu_toggle .menu_open,
+    .menu_toggle .menu_close {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-top: -15px;
+      margin-left: -12px;
+      transition: transform 0.7s cubic-bezier(1, 0.005, 0.24, 1);
+    }
+
+    .menu_toggle .menu_open {
+      transform-origin: -100px -100px;
+    }
+
+    .menu_toggle .menu_close {
+      transform: rotate(20deg);
+      transform-origin: -100px -160px;
+    }
+
+    .menu_items {
+      position: fixed;
+      bottom: 0;
+      left: 50px;
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .menu_items li {
+      height: 60px;
+      margin-bottom: 30px;
+      transform: translateX(-300px);
+      transition: transform 0.7s 0s cubic-bezier(1, 0.005, 0.24, 1);
+    }
+
+    .menu_items li:nth-child(2) {
+      margin-left: 40px;
+    }
+
+    .menu_items li:nth-child(3) {
+      margin-left: 80px;
+    }
+
+    .menu_items a {
+      display: block;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #a4a4a4;
+      transition: color 0.2s;
+    }
+
+    .menu_items a .icon {
+      position: relative;
+      display: inline-block;
+      margin-right: 25px;
+      color: #f0f0f0;
+    }
+
+    .menu_items a .icon:after {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      content: '';
+      display: block;
+      width: 60px;
+      height: 60px;
+      margin-left: -33px;
+      margin-top: -32px;
+      border-radius: 100%;
+      border: 2px solid #f0f0f0;
+      transition: border-color 0.2s;
+    }
+
+    .menu_items a:hover {
+      color: #f0f0f0;
+    }
+
+    .menu_items a:hover .icon:after {
+      border-color: #f37272;
+    }
+
+    .menu_items a:active .icon {
+      color: #f37272;
+    }
+
+    /* Let's open up the menu */
+    .shazam {
+      /*.content_inner {
+   height: 100%;
+   }*/
+    }
+
+    .shazam .content {
+      transform: rotate(-30deg);
+    }
+
+    .shazam .menu_open {
+      transform: rotate(-20deg);
+    }
+
+    .shazam .menu_close {
+      transform: rotate(0);
+    }
+
+    .shazam .menu_items li {
+      transform: translateX(0);
+      transition: transform 0.35s 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .shazam .menu_items li:nth-child(2) {
+      transition-delay: 0.47s;
+    }
+
+    .shazam .menu_items li:nth-child(3) {
+      transition-delay: 0.48s;
+    }
+
+    h1 {
+      padding-bottom: 15px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .body {
+      color: #584e4a;
+    }
+
+    .social i {
+      font-size: 20px;
+      background-color: #f37272;
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      text-align: center;
+      color: white;
+      border-radius: 50px;
+    }
+  </style>
+</head>
+
+<body class="body">
+  <div class="page">
+    <span class="menu_toggle">
+      <i class="menu_open fa fa-bars fa-lg"></i>
+      <i class="menu_close fa fa-times fa-lg"></i>
+    </span>
+    <ul class="menu_items">
+      <li><a href="https://drive.google.com/folderview?id=1Y0FYFNJ1QMWXs4ZUV_vJ0_N6Ftzy9l-W"><i
+            class="icon fa fa-home fa-2x"></i> Notes House</a></li>
+      <li><a href="https://meet.google.com/jpe-pwwo-yem" target="_blank"><i class="icon fa fa-phone fa-2x"></i>
+          Ash's Meet</a></li>
+      <li><a href="#"><i class="icon fa fa-heart fa-2x"></i> Please</a></li>
+    </ul>
+    <main class="content">
+      <div class="content_inner">
+        <!-- <h1>Amazing Design Exclusively</h1> -->
+        <br><br>
+
+        <body id=full>
+
+          <h1 id=head>
+            <b>ECE-A TIME TABLE</b>
+          </h1>
+          <div class="onav">
+
+            <!-- <nav id="nav" class="nav">
+            <ul>
+              <li><a href="https://drive.google.com/folderview?id=1Y0FYFNJ1QMWXs4ZUV_vJ0_N6Ftzy9l-W" target="_black">
+                  Notes
+                </a></li>
+              <li><a href="https://meet.google.com/jpe-pwwo-yem">
+                  Ash-Meet
+                </a></li>
+            </ul>
+          </nav> -->
+
+            <!-- <nav id=nav><a href="https://drive.google.com/folderview?id=1Y0FYFNJ1QMWXs4ZUV_vJ0_N6Ftzy9l-W" target="_black">
+                      <h2 class=notes> Notes</h2>
+                  </a> <a href="https://meet.google.com/jpe-pwwo-yem">
+                      <h2 class=mmlink> Ash-Meet</h2>
+                  </a>
+              </nav> -->
+          </div>
+          <h2 id=made>SITE Made by - <a href="https://instagram.com/einstein.ash18122104?utm_medium=copy_link"
+              target="_blank"
+              style="color:black;  background: linear-gradient(#7ff3e9, #da6dc7);  font-family: 'Lobster', cursive;">Einstein_Ash</a>
+          </h2>
+
+          <p align="center" class="ar">
+            <image src="ar.jpg" width=200px height=150px></image>
+          </p>
+
+          <p class="noti_strip2">
+            <marquee style="font-size: 30px;" class=noti_strip><b><i> #ECE-B_walon : Here's a hearty welcome, big and
+                  warm
+                  enough to
+                  enxompass you all !
+                  :) </i></b></marquee>
+          </p>
+          <hr>
 
 
-    </style>
-
-<body id=full>
-
-    <h1 id=head>
-        <b>ECE-A TIME TABLE</b>
-    </h1>
-    <div class="onav">
-
-        <nav id=nav><a href="https://drive.google.com/folderview?id=1Y0FYFNJ1QMWXs4ZUV_vJ0_N6Ftzy9l-W" target="_black">
-                <h2 class=notes> Notes</h2>
-            </a> <a href="https://meet.google.com/jpe-pwwo-yem">
-                <h2 class=mmlink> Ash-Meet</h2>
-            </a>
-        </nav>
-    </div>
-    <h2 id=made>SITE Made by - <a href="https://instagram.com/einstein.ash18122104?utm_medium=copy_link" target="_blank"
-            style="color:black;  background: linear-gradient(#7ff3e9, #da6dc7);  font-family: 'Lobster', cursive;">Einstein_Ash</a>
-    </h2>
-
-    <p align="center" class="ar">
-        <image src="ar.jpg" width=200px height=150px></image>
-    </p>
-
-    <p class="noti_strip2">
-        <marquee style="font-size: 30px;" class=noti_strip><b><i> #ECE-B_walon : Here's a hearty welcome, big and warm
-                    enough to
-                    enxompass you all !
-                    :) </i></b></marquee>
-    </p>
-    <hr>
 
 
-
-
-    <body id=tb>
-        <!-- time****************************************************-->
-        <table border="20" border="7">
-            <tr>
+          <body id=tb>
+            <!-- time****************************************************-->
+            <table border="20" border="7">
+              <tr>
                 <th id=time>Time </th>
 
                 <th id=time></th>
@@ -72,10 +290,10 @@
                 <th id=time>1:45</th>
                 <th id=time>2:40</th>
                 <th id=time>3:35</th>
-            </tr>
+              </tr>
 
-            <!-- ******PERIOD************************************ -->
-            <tr>
+              <!-- ******PERIOD************************************ -->
+              <tr>
                 <th>Period</th>
                 <th></th>
                 <th>1</th>
@@ -87,53 +305,53 @@
                 <th>7</th>
                 <th>8</th>
 
-            </tr>
-            <!-- *********************************MONDAY***********************************-->
-            <tr>
+              </tr>
+              <!-- *********************************MONDAY***********************************-->
+              <tr>
                 <th colspan="9" style=" padding: 10px 10px 10px 10px; ">Monday</th>
                 <th>9 (5 PM)</th>
-            </tr>
-            <!-- aaaaaaaaaaaaaaaaaaaaaaa1111111111111111111****************************************************-->
-            <tr>
+              </tr>
+              <!-- aaaaaaaaaaaaaaaaaaaaaaa1111111111111111111****************************************************-->
+              <tr>
                 <th rowspan="4">EC-A</th>
                 <th>1</th>
 
                 <th rowspan="4" style="background-color:pink;"><a href="http://meet.google.com/sis-fwrn-qpi"
-                        target="_blank">CSE-L</a></th>
+                    target="_blank">CSE-L</a></th>
                 <th rowspan="4" style="background-color:rgb(153, 156, 207)"><a
-                        href="https://meet.google.com/qsw-aicj-wci" target="_blank">MA-L </a></th>
+                    href="https://meet.google.com/qsw-aicj-wci" target="_blank">MA-L </a></th>
                 <th rowspan="4" style="background-color: lightgray;"> <a
-                        href="https://zoom.us/j/94075205884?pwd=dUJYcFRqdHJkK0xzdzVvSUJESWFyUT09" target="_blank">BS-L
-                        By
-                        GS</a></th>
+                    href="https://zoom.us/j/94075205884?pwd=dUJYcFRqdHJkK0xzdzVvSUJESWFyUT09" target="_blank">BS-L
+                    By
+                    GS</a></th>
                 <th></th>
                 <th></th>
                 <th colspan="2" style="padding :5px 5px 5px 30px ; background-color: bisque;" rowspan="4">EP</th>
                 <th rowspan="4" style="background-color:orangered; "><a href="https://meet.google.com/zbx-umxg-fug"
-                        target="_blank">P Edu. </a></th>
-            </tr>
+                    target="_blank">P Edu. </a></th>
+              </tr>
 
 
-            <br> <br>
-            <tr>
+              <br> <br>
+              <tr>
                 <th>2</th>
                 <th></th>
                 <th></th>
-            </tr>
-            <tr>
+              </tr>
+              <tr>
                 <th>3</th>
                 <th></th>
                 <th></th>
-            </tr>
-            <tr>
+              </tr>
+              <tr>
                 <th>4</th>
                 <th></th>
                 <th></th>
-            </tr>
+              </tr>
 
 
-            <!-- bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb11111111111111111111111111111111111111 -->
-            <tr>
+              <!-- bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb11111111111111111111111111111111111111 -->
+              <tr>
                 <th rowspan="4">EC-B</th>
                 <th>5</th>
 
@@ -147,33 +365,33 @@
                 <th colspan="2" rowspan="2" style="padding :5px 5px 5px 40px ;">CSE(P)</th>
 
 
-            </tr>
-            <tr>
+              </tr>
+              <tr>
                 <th>6</th>
                 <th rowspan="2">MA-T </th>
                 <th></th>
 
 
-            </tr>
-            <tr>
+              </tr>
+              <tr>
                 <th>7</th>
                 <th></th>
                 <th colspan="2" style="padding :5px 5px 5px 40px ; background-color: lightcyan;">BOP(P) SWC</th>
 
-            </tr>
-            <tr>
+              </tr>
+              <tr>
                 <th>8</th>
                 <th></th>
                 <th></th>
                 <th colspan="2"></th>
-            </tr>
+              </tr>
 
-            <!-- *************************TUESDAY**************************-->
-            <tr>
+              <!-- *************************TUESDAY**************************-->
+              <tr>
                 <th colspan="10 " style="padding: 10px 10px 10px 10px ">Tuesday</th>
-            </tr>
-            <!-- aaaaaaaaaaaaaaaaaaaaaaaa2222222222222222222222222 -->
-            <tr>
+              </tr>
+              <!-- aaaaaaaaaaaaaaaaaaaaaaaa2222222222222222222222222 -->
+              <tr>
                 <th rowspan="4">EC-A</th>
                 <th>1</th>
 
@@ -183,58 +401,58 @@
                 <th></th>
                 <th rowspan="4" style="background-color:pink;">CSE(L)</th>
                 <th rowspan="4" style="background-color:rgb(153, 156, 207)"><a
-                        href="https://meet.google.com/piz-ctos-emp" target="_blank">MA-L </a></th>
+                    href="https://meet.google.com/piz-ctos-emp" target="_blank">MA-L </a></th>
                 <th rowspan="4" style="background-color:yellow;"><a href="https://meet.google.com/eux-hdrr-spx"
-                        target="_blank">PH(L)</a></th>
-            </tr>
-            <tr>
+                    target="_blank">PH(L)</a></th>
+              </tr>
+              <tr>
                 <th>2</th>
                 <th style="background-color:rgb(153, 156, 207)">MA(T)</th>
                 <th style="background-color:yellow;">PH(T)</th>
                 <th colspan="2" style="background-color:lightcyan;"><a href="https://meet.google.com/kdn-rozq-tbx"
-                        target="_blank"> BOP(P) SWC</a> </th>
+                    target="_blank"> BOP(P) SWC</a> </th>
                 <th></th>
-            </tr>
-            <tr>
+              </tr>
+              <tr>
                 <th>3</th>
                 <th rowspan="2" colspan="2 " style="background-color:pink;"><a
-                        href="https://meet.google.com/sis-fwrn-qpi" target="_blank"> CSE (P)</a></th>
+                    href="https://meet.google.com/sis-fwrn-qpi" target="_blank"> CSE (P)</a></th>
                 <th></th>
                 <th colspan="2"></th>
 
-            </tr>
-            <tr>
+              </tr>
+              <tr>
                 <th>4</th>
 
                 <th style="background-color:yellow;">PH(T) </th>
                 <th colspan="2" style="background-color:rgb(153, 156, 207)"> MA(T)</th>
 
-            </tr>
+              </tr>
 
 
-            <!-- bbbbbbbbbbbbbbbbbbbbbbbbbb22222222222222222222222222222222 -->
-            <tr>
+              <!-- bbbbbbbbbbbbbbbbbbbbbbbbbb22222222222222222222222222222222 -->
+              <tr>
                 <th rowspan="4">EC-B</th>
                 <th>5</th>
 
                 <th colspan="2"></th>
                 <th rowspan="4" colspan="2" style="padding :5px 5px 5px 40px ; "><a
-                        href="https://meet.google.com/sfm-tixx-zzg" target="_blank">EN-L</a> </th>
+                    href="https://meet.google.com/sfm-tixx-zzg" target="_blank">EN-L</a> </th>
                 <th></th>
                 <th></th>
                 <th rowspan="4">CSE(L)</th>
                 <th rowspan="4">BOP(L) SWC</th>
-            </tr>
+              </tr>
 
-            <tr>
+              <tr>
                 <th>6</th>
                 <th colspan="2">BOP(P) SWC</th>
                 <th></th>
                 <th>PH(T)</th>
 
-            </tr>
+              </tr>
 
-            <tr>
+              <tr>
                 <th>7</th>
 
                 <th></th>
@@ -242,67 +460,67 @@
                 <th></th>
                 <th></th>
 
-            </tr>
-            <tr>
+              </tr>
+              <tr>
                 <th>8</th>
 
                 <th></th>
                 <th></th>
                 <th></th>
                 <th></th>
-            </tr>
+              </tr>
 
-            <!-- *********************************Wednesday***********************************-->
-            <tr>
+              <!-- *********************************Wednesday***********************************-->
+              <tr>
                 <th colspan="10 " style="padding: 10px 10px 10px 10px ">Wednesday</th>
-            </tr>
+              </tr>
 
-            <!-- aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa33333333333333333333333333333333333 -->
+              <!-- aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa33333333333333333333333333333333333 -->
 
-            <tr>
+              <tr>
                 <th rowspan="4">EC-A</th>
                 <th>1</th>
 
                 <th rowspan="4" style="background-color:rgb(153, 156, 207)"><a
-                        href="https://meet.google.com/rkw-ifai-zpj" target="_blank">MA(L)</a> </th>
+                    href="https://meet.google.com/rkw-ifai-zpj" target="_blank">MA(L)</a> </th>
                 <th rowspan="4" style="background-color:lightgreen;"><a href="https://meet.google.com/ddb-rgxp-art"
-                        target="_blank">EN-L</a></th>
+                    target="_blank">EN-L</a></th>
                 <th rowspan="4" style="background-color: lightcoral;"><a href="https://meet.google.com/uxg-httq-iek"
-                        target="_blank">BOP(L) SWC</a< /th>
+                    target="_blank">BOP(L) SWC</a< /th>
                 <th></th>
                 <th></th>
                 <th></th>
                 <th rowspan="4" colspan="4" style="padding :5px 5px 5px 40px ;background-color:lightgreen;"><a
-                        href="https://meet.google.com/jip-moue-ukb" target="_blank">EN(P)</a></th>
+                    href="https://meet.google.com/jip-moue-ukb" target="_blank">EN(P)</a></th>
 
-            </tr>
-            <tr>
+              </tr>
+              <tr>
                 <th>2</th>
 
                 <th></th>
                 <th></th>
                 <th></th>
 
-            </tr>
-            <tr>
+              </tr>
+              <tr>
                 <th>3</th>
 
                 <th></th>
                 <th></th>
                 <th></th>
 
-            </tr>
-            <tr>
+              </tr>
+              <tr>
                 <th>4</th>
 
                 <th></th>
                 <th></th>
                 <th></th>
 
-            </tr>
+              </tr>
 
-            <!-- bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb33333333333333333333333333333 -->
-            <tr>
+              <!-- bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb33333333333333333333333333333 -->
+              <tr>
                 <th rowspan="4">EC-B</th>
                 <th>5</th>
 
@@ -313,57 +531,57 @@
                 <th></th>
                 <th rowspan="4" colspan="4" style="padding :5px 5px 5px 40px ;">PH(P)</th>
 
-            </tr>
-            <tr>
+              </tr>
+              <tr>
                 <th>6</th>
 
                 <th></th>
                 <th></th>
                 <th></th>
 
-            </tr>
-            <tr>
+              </tr>
+              <tr>
                 <th>7</th>
 
                 <th></th>
                 <th></th>
                 <th>PH(T)</th>
 
-            </tr>
-            <tr>
+              </tr>
+              <tr>
                 <th>8</th>
 
                 <th></th>
                 <th></th>
                 <th></th>
 
-            </tr>
+              </tr>
 
-            <!-- *********************************Thrusday***********************************-->
-            <tr>
+              <!-- *********************************Thrusday***********************************-->
+              <tr>
                 <th colspan="10 " style="padding: 10px 10px 10px 10px ">Thursday</th>
-            </tr>
+              </tr>
 
-            <!-- aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa4444444444444444444444444444444 -->
+              <!-- aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa4444444444444444444444444444444 -->
 
-            <tr>
+              <tr>
                 <th rowspan="4">EC-A</th>
                 <th>1</th>
 
                 <th rowspan="4" style="background-color:lightgreen;"><a href="https://meet.google.com/sfm-tixx-zzg"
-                        target="_blank">EN-L</a></th>
+                    target="_blank">EN-L</a></th>
                 <th rowspan="4" style="background-color: lightcyan;"><a href="https://meet.google.com/ysy-zmkr-wxm"
-                        target="_blank">BOP(L) SWC</a></th>
+                    target="_blank">BOP(L) SWC</a></th>
                 <th colspan="2" rowspan="4" style="background-color:yellow;"><a
-                        href="https://meet.google.com/tzh-jjjr-ndd">Mam_</a> PH(P)<a
-                        href="http://meet.google.com/wej-ruxk-ibg">_Sir</a></th>
+                    href="https://meet.google.com/tzh-jjjr-ndd">Mam_</a> PH(P)<a
+                    href="http://meet.google.com/wej-ruxk-ibg">_Sir</a></th>
                 <th></th>
                 <th></th>
                 <th colspan="2"></th>
 
 
-            </tr>
-            <tr>
+              </tr>
+              <tr>
                 <th>2</th>
 
                 <th></th>
@@ -371,17 +589,17 @@
                 <th></th>
                 <th></th>
 
-            </tr>
-            <tr>
+              </tr>
+              <tr>
                 <th>3</th>
 
                 <th></th>
                 <th></th>
                 <th colspan="2" style="background-color: lightcyan;"><a href="https://meet.google.com/cro-aknh-hkr"
-                        target="_blank">BOP(P) MGG</a></th>
+                    target="_blank">BOP(P) MGG</a></th>
 
-            </tr>
-            <tr>
+              </tr>
+              <tr>
                 <th>4</th>
 
                 <th colspan="2"></th>
@@ -389,10 +607,10 @@
                 <th></th>
 
 
-            </tr>
+              </tr>
 
-            <!-- bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb44444444444444444444444444444444444444 -->
-            <tr>
+              <!-- bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb44444444444444444444444444444444444444 -->
+              <tr>
                 <th rowspan="4">EC-B</th>
                 <th>5</th>
 
@@ -403,75 +621,75 @@
 
                 <th rowspan="4" colspan="3" style="padding :5px 5px 5px 50px ;">EP</th>
 
-            </tr>
-            <tr>
+              </tr>
+              <tr>
                 <th>6</th>
 
                 <th></th>
                 <th></th>
                 <th></th>
 
-            </tr>
-            <tr>
+              </tr>
+              <tr>
                 <th>7</th>
 
                 <th></th>
                 <th></th>
                 <th></th>
 
-            </tr>
-            <tr>
+              </tr>
+              <tr>
                 <th>8</th>
 
                 <th colspan="2" style="padding: 10px 10px 10px 40px ">BOP(P) MGG</th>
                 <th></th>
 
-            </tr>
+              </tr>
 
-            <!-- *********************************Friday***********************************-->
-            <tr>
+              <!-- *********************************Friday***********************************-->
+              <tr>
                 <th colspan="10 " style="padding: 10px 10px 10px 10px ">Friday</th>
-            </tr>
+              </tr>
 
-            <!-- aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa55555555555555555555555555555555555555-->
+              <!-- aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa55555555555555555555555555555555555555-->
 
-            <tr>
+              <tr>
                 <th rowspan="4">EC-A</th>
                 <th>1</th>
 
                 <th colspan="2" style="background-color: lightcyan;"><a
-                        href="https://meet.google.com/pwk-yckx-fzz?hs=224" target="_blank">BOP(P) MGG</a></th>
+                    href="https://meet.google.com/pwk-yckx-fzz?hs=224" target="_blank">BOP(P) MGG</a></th>
                 <th colspan="2" rowspan="2" style="background-color:pink;">CSE(P)</th>
                 <th></th>
                 <th rowspan="4" style="background-color: lightgray;"><a
-                        href="https://zoom.us/j/94075205884?pwd=dUJYcFRqdHJkK0xzdzVvSUJESWFyUT09" target="_blank">BS-L
-                        By
-                        GS</a></th>
+                    href="https://zoom.us/j/94075205884?pwd=dUJYcFRqdHJkK0xzdzVvSUJESWFyUT09" target="_blank">BS-L
+                    By
+                    GS</a></th>
                 <th rowspan="4" style="background-color: bisque;"><a href="https://meet.google.com/fba-uadw-qrs"
-                        target="_blank">EP(L)</a></th>
+                    target="_blank">EP(L)</a></th>
                 <th rowspan="4" style="background-color:yellow;">PH(L)</th>
 
-            </tr>
-            <tr>
+              </tr>
+              <tr>
                 <th>2</th>
 
                 <th></th>
                 <th></th>
                 <th></th>
 
-            </tr>
-            <tr>
+              </tr>
+              <tr>
                 <th>3</th>
 
                 <th></th>
                 <th></th>
                 <th style="background-color:rgb(153, 156, 207)">MA(T)</th>
                 <th style="background-color:yellow;"><a href="https://meet.google.com/oes-jkwj-nib"
-                        target="_blank">PH(T)</a></th>
+                    target="_blank">PH(T)</a></th>
                 <th></th>
 
-            </tr>
-            <tr>
+              </tr>
+              <tr>
                 <th>4</th>
 
                 <th></th>
@@ -479,10 +697,10 @@
                 <th colspan="2" style="background-color: lightcyan;">BOP(P) SWC</th>
                 <th></th>
 
-            </tr>
+              </tr>
 
-            <!-- bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb5555555555555555555555555555 -->
-            <tr>
+              <!-- bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb5555555555555555555555555555 -->
+              <tr>
                 <th rowspan="4">EC-B</th>
                 <th>5</th>
 
@@ -495,8 +713,8 @@
                 <th rowspan="4">PH(L)</th>
                 <th rowspan="4" style="background-color:lightgreen;">EN(L)</th>
 
-            </tr>
-            <tr>
+              </tr>
+              <tr>
                 <th>6</th>
 
                 <th></th>
@@ -505,8 +723,8 @@
                 <th></th>
                 <th></th>
 
-            </tr>
-            <tr>
+              </tr>
+              <tr>
                 <th>7</th>
 
                 <th rowspan="2" colspan="2">CSE(P)</th>
@@ -514,62 +732,62 @@
                 <th></th>
                 <th></th>
 
-            </tr>
-            <tr>
+              </tr>
+              <tr>
                 <th>8</th>
 
                 <th>PH(T)</th>
                 <th>MA(T)</th>
                 <th></th>
 
-            </tr>
+              </tr>
 
-            <!-- *********************************Saturday***********************************-->
-            <tr>
+              <!-- *********************************Saturday***********************************-->
+              <tr>
                 <th colspan="10 " style="padding: 10px 10px 10px 10px ">Saturday</th>
-            </tr>
+              </tr>
 
-            <!-- aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa666666666666666666666666666666-->
+              <!-- aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa666666666666666666666666666666-->
 
-            <tr>
+              <tr>
                 <th rowspan="4">EC-A</th>
                 <th>1</th>
 
                 <th rowspan="4" style="background-color:bisque;"><a href="https://meet.google.com/fba-uadw-qrs"
-                        target="_blank">EP(L)</a></th>
+                    target="_blank">EP(L)</a></th>
                 <th rowspan="4" style="background-color:yellow;"><a href="https://meet.google.com/wos-rcmj-dxx"
-                        target="_blank">PH(L)</a></th>
+                    target="_blank">PH(L)</a></th>
                 <th rowspan="4" style="background-color:pink;"><a href="https://meet.google.com/jeg-vazz-zyk"
-                        target="_blank">CSE(L)</a></th>
+                    target="_blank">CSE(L)</a></th>
                 <th rowspan="4" style="background-color:rgb(153, 156, 207)"><a
-                        href="https://meet.google.com/bbz-aiir-fes" target="_blank">MA(L)</a></th>
+                    href="https://meet.google.com/bbz-aiir-fes" target="_blank">MA(L)</a></th>
                 <th rowspan="4"></th>
                 <th rowspan="4" style="background-color: lightcyan;"><a href="https://meet.google.com/fxd-hdfi-npw"
-                        target="_blank">BOP(L) </a></th>
+                    target="_blank">BOP(L) </a></th>
                 <th rowspan="4" style="background-color: lightgray;"><a
-                        href="https://zoom.us/j/94075205884?pwd=dUJYcFRqdHJkK0xzdzVvSUJESWFyUT09" target="_blank">BS-L
-                        By GS</a></th>
+                    href="https://zoom.us/j/94075205884?pwd=dUJYcFRqdHJkK0xzdzVvSUJESWFyUT09" target="_blank">BS-L
+                    By GS</a></th>
                 <th rowspan="4" style="background-color:lightgreen;"><a href="https://meet.google.com/ssw-fthu-fgs"
-                        target="_blank">EN(L)</a>
+                    target="_blank">EN(L)</a>
                 </th>
-            </tr>
-            <tr>
+              </tr>
+              <tr>
                 <th>2</th>
 
-            </tr>
-            <tr>
+              </tr>
+              <tr>
                 <th>3</th>
 
 
-            </tr>
-            <tr>
+              </tr>
+              <tr>
                 <th>4</th>
 
 
-            </tr>
+              </tr>
 
-            <!-- bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb6666666666666666666666666666 -->
-            <tr>
+              <!-- bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb6666666666666666666666666666 -->
+              <tr>
                 <th rowspan="4">EC-B</th>
                 <th>5</th>
 
@@ -582,25 +800,51 @@
                 <th rowspan="4" style="background-color:pink;">CSE(L)</th>
                 <th rowspan="4">MA(L)</th>
 
-            </tr>
-            <tr>
+              </tr>
+              <tr>
                 <th>6</th>
 
-            </tr>
-            <tr>
+              </tr>
+              <tr>
                 <th>7</th>
 
-            </tr>
-            <tr>
+              </tr>
+              <tr>
                 <th>8</th>
 
 
-            </tr>
+              </tr>
 
-        </table>
+            </table>
 
-    </body>
+          </body>
 
+        </body>
+        <div class="social">
+          <i class="fa fa-facebook"></i>
+          <i class="fa fa-twitter"></i>
+          <i class="fa fa-linkedin"></i>
+          <i class="fa fa-behance"></i>
+          <i class="fa fa-youtube"></i>
+        </div>
+
+
+      </div>
+    </main>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <script>
+    // elements
+    var $page = $('.page');
+
+    $('.menu_toggle').on('click', function () {
+      $page.toggleClass('shazam');
+    });
+    $('.content').on('click', function () {
+      $page.removeClass('shazam');
+    });
+
+  </script>
 </body>
 
 </html>

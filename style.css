@@ -101,3 +101,20 @@ margin-right: 10px; */
 }
 
 
+  .noti_strip {
+
+    border: 3px solid rgb(204, 125, 125);
+    border-radius: 10px;
+    background: rgb(255, 57, 57);
+    color: white;
+    font-size: large;
+    width : 70% ;
+    direction : left;
+     height :20px;
+     margin: 0px 200px 0px 200px;
+             
+
+  }
+  
+
+

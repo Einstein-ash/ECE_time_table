@@ -1,5 +1,5 @@
 #full {
-    margin: 15px 15px 15px 15px;
+    margin: 15px 15px 0px 15px;
     border : 15px solid white;
     box-sizing: 10px solid white;
     /* border: 50px solid white; */
@@ -122,7 +122,7 @@
     width : 100% ;
     direction: left ;
     height :35px;
-    text-shadow: 3px -1px 1px rgb(172, 170, 170);
+    text-shadow: 3px -2px 0px rgb(172, 170, 170);
    
     
  }

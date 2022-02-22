@@ -105,7 +105,7 @@
     padding : 5px 5px;
   }
 
-  .noti_strip {
+ .noti_strip {
 
     border: 0px solid rgb(0, 0, 0);
     border-radius: 10px;
@@ -115,7 +115,7 @@
     width : 100% ;
     direction: left ;
     height :35px;
-  text-shadow: 3px -2px 0px rgb(191, 186, 186);
+    text-shadow: 3px -2px 0px rgb(172, 170, 170);
    
     
  }
